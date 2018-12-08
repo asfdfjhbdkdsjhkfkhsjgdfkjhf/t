@@ -442,7 +442,31 @@ client.on('message', message => {
        }
    });
    
-
+    client.on("message", message => {
+  
+              if (message.content.startsWith(prefix + "help")) {
+message.author.send(`**اوامر البوت :
+!bc : برودكاست للاونلايت
+!obc : برودكاست للجميع
+!move : سحب عضو من روم
+!role : اعطاء رتبة لشخص معين
+!closeroom : اغلاق الروم الكتابي
+!openeoom : فتح الروم الكتابي
+!kick : طرد عضو معين
+!ban : تبنيد عضو معين 
+!clear : مسح الشات 
+!roles : رتب السيرفر
+!server : معلومات السيرفر 
+!image : عرض صورة شخص ما
+!move all : سحب جميع الاعضاء الى رومك
+!ping : بنق البوت
+-----------------------------------------
+!inv : دعوة البوت لسيرفرك 
+!bot : معلومات البوت 
+سيرفر الدعم : https://discord.gg/asXKGw **`)
+			  }
+			  
+			  });
 
 client.on('message', message => {
      if (message.content === prefix + "bot") {
