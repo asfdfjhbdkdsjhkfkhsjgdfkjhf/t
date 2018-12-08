@@ -461,7 +461,7 @@ client.on('message', message => {
         if (message.content.toLowerCase() === prefix + "inv") {
             if(!message.channel.guild) return;
         let embed = new Discord.RichEmbed()
-        .setTitle(`:small_orange_diamond: Click Here To Invite Planet. `)
+        .setTitle(`:small_orange_diamond: Click Here To Invite Me To Your Server. `)
         .setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
      message.channel.sendEmbed(embed);
        }
