@@ -415,6 +415,9 @@ message.author.send(`**اوامر البوت :
 #clear : مسح الشات 
 #roles : رتب السيرفر
 #server : معلومات السيرفر 
+#image : عرض صورة شخص ما
+#move all : سحب جميع الاعضاء الى رومك
+#ping : بنق البوت
 -----------------------------------------
 #setp : وضع حالة بلاينق للبوت
 #setwt : حالة واتشنق
@@ -425,6 +428,37 @@ message.author.send(`**اوامر البوت :
 			  }
 			  
 			  });
- 
+ client.on('message', message => {
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+    if(!message.channel.guild) return;
+if(message.content.toLowerCase() === prefix + "ping") {
+if(!message.channel.guild) return;
+var msg = `${Date.now() - message.createdTimestamp}`
+var api = `${Math.round(client.ping)}`
+if (message.author.bot) return;
+let embed = new Discord.RichEmbed()
+                  .setColor('#36393e')
+.setTitle(' Time Taken : '+msg + " ms")
+.setAuthor(' Discord Api : '+api + " ms")
+message.channel.send({embed:embed}).then(message => message.delete(5000));
+}
+});
 
+
+ client.on('message', message => {
+ if (message.content.toLowerCase() === prefix + "move all") {
+     message.delete(4000)
+ if(!message.channel.guild) return;
+ if (!message.member.hasPermission("MOVE_MEMBERS")) return;
+ if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return;
+if (message.member.voiceChannel == null) return;
+ var author = message.member.voiceChannelID;
+ var m = message.guild.members.filter(m=>m.voiceChannel)
+ message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+ m.setVoiceChannel(author)
+ })
+ message.channel.send('\`Moved All Voice Members To Your Channel\`').then(m => m.delete(4000))
+ }
+   });
   client.login(process.env.TOKEN);
